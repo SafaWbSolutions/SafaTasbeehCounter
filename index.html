@@ -766,7 +766,10 @@
 
   function doHaptic(pattern) {
     if (!hapticOn) return;
-    if (navigator.vibrate) navigator.vibrate(pattern);
+    if (!navigator.vibrate) return;
+    // Cancel any ongoing vibration first, then fire — gives sharper feel
+    navigator.vibrate(0);
+    setTimeout(() => navigator.vibrate(pattern), 1);
   }
 
   function toggleSound() {
@@ -784,7 +787,7 @@
     const btn = document.getElementById('hapticBtn');
     btn.textContent = hapticOn ? '📳 Haptic: ON' : '📴 Haptic: OFF';
     btn.classList.toggle('off', !hapticOn);
-    if (hapticOn) doHaptic(40); // preview
+    if (hapticOn) doHaptic([80, 20, 40]); // preview
   }
 
   function syncToggleUI() {
@@ -871,12 +874,12 @@
     rip.classList.remove('animate'); void rip.offsetWidth; rip.classList.add('animate');
 
     playTapSound();
-    doHaptic(25);
+    doHaptic([80, 20, 40]);
 
     if (state.current >= t.target) {
       state.rounds++; state.current = 0;
       playCelebSound();
-      doHaptic([60, 30, 60, 30, 100]);
+      doHaptic([100, 50, 100, 50, 150]);
       showToast('مَاشَاءَاللّٰه', t.name + ' × ' + t.target + ' Complete! 🌟');
     }
     updateUI(); saveState();
