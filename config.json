@@ -1,0 +1,10 @@
+{
+  "promotions": [
+    {
+      "start": "00:00",
+      "end": "23:59",
+      "image": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/images/donation-qr.jpg",
+      "link": "https://your-donation-link.com"
+    }
+  ]
+}
