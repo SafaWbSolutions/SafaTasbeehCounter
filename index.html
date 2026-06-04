@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#0a1628" />
+  <meta name="theme-color" content="#f5edd8" />
   <meta name="description" content="Safa Tasbeeh Counter - Digital Islamic Tasbeeh" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Safa Tasbeeh" />
   <title>Safa Tasbeeh Counter</title>
   <link rel="icon" type="image/png" href="icons/favicon.png" />
@@ -19,20 +19,22 @@
 
   <style>
     :root {
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --gold-dark: #8b6914;
-      --deep-navy: #0a1628;
-      --navy: #0f2044;
-      --navy-mid: #152a56;
-      --navy-light: #1e3a6e;
+      --gold: #b8860b;
+      --gold-light: #d4a017;
+      --gold-dark: #7a5c00;
+      --gold-pale: #f0d060;
       --teal: #1a6b5e;
       --teal-light: #22957f;
-      --cream: #f5edd8;
-      --cream-light: #fdf6e8;
-      --white: #ffffff;
-      --shadow-gold: rgba(201, 168, 76, 0.3);
-      --shadow-deep: rgba(0, 0, 0, 0.6);
+      --teal-dark: #0f4a3e;
+      --bg: #fdf6e8;
+      --bg2: #f5edd8;
+      --bg3: #ede0c4;
+      --card: #ffffff;
+      --text-dark: #2c1a00;
+      --text-mid: #5a3e1b;
+      --text-light: #8a6a3a;
+      --shadow: rgba(139, 90, 0, 0.15);
+      --shadow-deep: rgba(139, 90, 0, 0.3);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -41,26 +43,26 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Amiri', serif;
-      background: var(--deep-navy);
-      color: var(--cream);
+      background: var(--bg);
+      color: var(--text-dark);
       user-select: none;
     }
 
     body {
       background:
-        radial-gradient(ellipse at 20% 0%, rgba(26,107,94,0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 100%, rgba(201,168,76,0.15) 0%, transparent 50%),
-        linear-gradient(180deg, #060e1e 0%, #0a1628 40%, #0f2044 100%);
+        radial-gradient(ellipse at 10% 0%, rgba(26,107,94,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 100%, rgba(184,134,11,0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #fdf8f0 0%, #f5edd8 60%, #ede0c4 100%);
       min-height: 100vh;
       min-height: 100dvh;
     }
 
-    /* ─── Islamic Pattern Overlay ─── */
+    /* Islamic pattern - subtle on white */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M30 0l7.5 13h-15L30 0zm0 60l-7.5-13h15L30 60zM0 30l13-7.5v15L0 30zm60 0l-13 7.5v-15L60 30zM30 22.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8860b' fill-opacity='0.06'%3E%3Cpath d='M30 0l7.5 13h-15L30 0zm0 60l-7.5-13h15L30 60zM0 30l13-7.5v15L0 30zm60 0l-13 7.5v-15L60 30zM30 22.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
     }
@@ -74,80 +76,78 @@
       height: 100dvh;
       max-width: 480px;
       margin: 0 auto;
-      padding: 0;
+      overflow: hidden;
     }
 
     /* ─── Header ─── */
     .header {
       text-align: center;
-      padding: 18px 16px 12px;
+      padding: 14px 16px 10px;
       flex-shrink: 0;
+      background: linear-gradient(180deg, rgba(253,248,240,0.95) 0%, transparent 100%);
     }
 
     .header-bismillah {
       font-family: 'Amiri', serif;
-      font-size: 22px;
-      color: var(--gold);
-      letter-spacing: 2px;
-      opacity: 0.9;
-      margin-bottom: 4px;
+      font-size: 20px;
+      color: var(--teal);
+      letter-spacing: 1px;
+      margin-bottom: 3px;
     }
 
     .header-title {
       font-family: 'Cinzel', serif;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
-      color: var(--cream-light);
+      color: var(--text-dark);
       letter-spacing: 3px;
       text-transform: uppercase;
-      text-shadow: 0 0 20px var(--shadow-gold);
     }
 
     .header-subtitle {
-      font-family: 'Amiri', serif;
-      font-size: 11px;
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
       color: var(--gold);
-      opacity: 0.7;
-      letter-spacing: 1px;
+      opacity: 0.8;
+      letter-spacing: 1.5px;
       margin-top: 2px;
       direction: ltr;
+      text-transform: uppercase;
     }
 
     .gold-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold-pale), var(--gold-light), transparent);
       margin: 8px 20px 0;
-      opacity: 0.6;
     }
 
     /* ─── Promotion Banner ─── */
     .promo-section {
       flex-shrink: 0;
-      margin: 8px 16px;
-      border-radius: 14px;
+      margin: 8px 14px;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(201,168,76,0.25);
-      background: rgba(15,32,68,0.8);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      border: 1.5px solid rgba(184,134,11,0.35);
+      background: var(--card);
+      box-shadow: 0 4px 16px var(--shadow);
     }
 
     .promo-label {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--navy-light) 100%);
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
       text-align: center;
-      padding: 7px 12px;
+      padding: 8px 12px;
       font-family: 'Noto Nastaliq Urdu', 'Amiri', serif;
       font-size: 13px;
-      color: var(--cream-light);
+      color: #fff;
       font-weight: 600;
       direction: rtl;
-      border-bottom: 1px solid rgba(201,168,76,0.2);
     }
 
     .promo-image-container {
       position: relative;
       width: 100%;
-      min-height: 130px;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      min-height: 120px;
+      background: linear-gradient(135deg, #f9f3e8 0%, #f0e8d0 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -156,7 +156,7 @@
 
     .promo-image-container img {
       width: 100%;
-      max-height: 160px;
+      max-height: 150px;
       object-fit: contain;
       display: block;
     }
@@ -166,19 +166,16 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 20px;
-      opacity: 0.5;
+      gap: 6px;
+      padding: 16px;
     }
 
-    .promo-placeholder-icon {
-      font-size: 36px;
-    }
+    .promo-placeholder-icon { font-size: 32px; line-height: 1; }
 
     .promo-placeholder-text {
       font-family: 'Amiri', serif;
-      font-size: 13px;
-      color: var(--gold);
+      font-size: 12px;
+      color: var(--text-light);
       text-align: center;
       direction: ltr;
     }
@@ -187,8 +184,8 @@
       display: block;
       width: 100%;
       padding: 9px;
-      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
-      color: var(--deep-navy);
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-light) 50%, var(--gold-dark) 100%);
+      color: #fff;
       font-family: 'Cinzel', serif;
       font-size: 12px;
       font-weight: 700;
@@ -201,42 +198,52 @@
       direction: ltr;
     }
 
-    .donate-btn:active {
-      transform: scale(0.98);
-      filter: brightness(0.9);
-    }
+    .donate-btn:active { transform: scale(0.98); filter: brightness(0.9); }
 
     /* ─── Tasbeeh Selector ─── */
     .tasbeeh-selector {
       flex-shrink: 0;
       display: flex;
-      gap: 6px;
-      margin: 6px 16px;
+      gap: 5px;
+      margin: 6px 14px;
       direction: ltr;
     }
 
     .tasbeeh-chip {
       flex: 1;
-      padding: 6px 4px;
+      padding: 6px 3px;
       border-radius: 20px;
-      border: 1px solid rgba(201,168,76,0.3);
-      background: rgba(15,32,68,0.6);
-      color: var(--gold);
+      border: 1.5px solid rgba(184,134,11,0.3);
+      background: var(--card);
+      color: var(--text-mid);
       font-family: 'Amiri', serif;
-      font-size: 10px;
+      font-size: 11px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s ease;
       direction: rtl;
-      line-height: 1.3;
+      line-height: 1.4;
+      box-shadow: 0 1px 4px var(--shadow);
+      overflow: hidden;
+    }
+
+    .tasbeeh-chip small {
+      display: block;
+      font-size: 8px;
+      direction: ltr;
+      color: var(--text-light);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
     }
 
     .tasbeeh-chip.active {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--navy-light) 100%);
-      border-color: var(--gold);
-      color: var(--cream-light);
-      box-shadow: 0 2px 10px var(--shadow-gold);
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border-color: var(--teal);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(26,107,94,0.35);
     }
+
+    .tasbeeh-chip.active small { color: rgba(255,255,255,0.75); }
 
     /* ─── Counter Section ─── */
     .counter-section {
@@ -245,28 +252,28 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 10px 20px;
-      gap: 12px;
+      padding: 8px 16px;
+      gap: 10px;
       min-height: 0;
     }
 
     .arabic-text {
       font-family: 'Amiri', serif;
-      font-size: 20px;
-      color: var(--gold-light);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--teal);
       text-align: center;
       direction: rtl;
-      text-shadow: 0 0 20px var(--shadow-gold);
-      line-height: 1.3;
-      position: relative;
-      z-index: 1;
+      line-height: 1.2;
+      flex-shrink: 0;
     }
 
     /* ─── Counter Ring ─── */
     .counter-ring-wrapper {
       position: relative;
-      width: min(200px, 45vw);
-      height: min(200px, 45vw);
+      width: min(190px, 42vw);
+      height: min(190px, 42vw);
+      flex-shrink: 0;
     }
 
     .counter-ring-svg {
@@ -279,14 +286,14 @@
 
     .counter-ring-bg {
       fill: none;
-      stroke: rgba(201,168,76,0.15);
-      stroke-width: 3;
+      stroke: var(--bg3);
+      stroke-width: 4;
     }
 
     .counter-ring-progress {
       fill: none;
       stroke: url(#goldGrad);
-      stroke-width: 3;
+      stroke-width: 4;
       stroke-linecap: round;
       transition: stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -298,58 +305,50 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0;
     }
 
     .counter-number {
       font-family: 'Cinzel', serif;
-      font-size: clamp(36px, 10vw, 52px);
+      font-size: clamp(38px, 10vw, 54px);
       font-weight: 700;
-      color: var(--cream-light);
+      color: var(--text-dark);
       line-height: 1;
-      text-shadow: 0 0 30px rgba(201,168,76,0.5);
       transition: transform 0.1s ease;
     }
 
-    .counter-number.pulse {
-      animation: numPulse 0.15s ease;
-    }
+    .counter-number.pulse { animation: numPulse 0.15s ease; }
 
     @keyframes numPulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.12); color: var(--gold-light); }
+      50% { transform: scale(1.12); color: var(--teal); }
       100% { transform: scale(1); }
     }
 
     .counter-target {
       font-family: 'Amiri', serif;
-      font-size: 12px;
-      color: var(--gold);
-      opacity: 0.7;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 2px;
     }
 
     /* ─── Tap Button ─── */
-    .tap-btn-wrapper {
-      position: relative;
-    }
+    .tap-btn-wrapper { position: relative; flex-shrink: 0; }
 
     .tap-ripple {
       position: absolute;
       inset: -8px;
       border-radius: 50%;
-      border: 2px solid var(--gold);
+      border: 2px solid var(--teal);
       opacity: 0;
       transform: scale(0.9);
       pointer-events: none;
     }
 
-    .tap-ripple.animate {
-      animation: rippleOut 0.5s ease-out forwards;
-    }
+    .tap-ripple.animate { animation: rippleOut 0.5s ease-out forwards; }
 
     @keyframes rippleOut {
-      0% { opacity: 0.7; transform: scale(0.9); }
-      100% { opacity: 0; transform: scale(1.4); }
+      0% { opacity: 0.6; transform: scale(0.9); }
+      100% { opacity: 0; transform: scale(1.5); }
     }
 
     .tap-btn {
@@ -358,18 +357,13 @@
       border-radius: 50%;
       border: none;
       cursor: pointer;
-      position: relative;
-      background: radial-gradient(circle at 35% 35%,
-        var(--teal-light) 0%,
-        var(--teal) 40%,
-        #0f4a3e 100%
-      );
+      background: radial-gradient(circle at 35% 35%, var(--teal-light) 0%, var(--teal) 45%, var(--teal-dark) 100%);
       box-shadow:
-        0 0 0 3px rgba(201,168,76,0.4),
-        0 0 0 6px rgba(201,168,76,0.1),
-        0 8px 32px rgba(0,0,0,0.6),
-        inset 0 2px 4px rgba(255,255,255,0.15),
-        inset 0 -2px 4px rgba(0,0,0,0.3);
+        0 0 0 3px rgba(26,107,94,0.25),
+        0 0 0 6px rgba(26,107,94,0.08),
+        0 8px 24px rgba(26,107,94,0.4),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -2px 4px rgba(0,0,0,0.2);
       transition: all 0.12s ease;
       display: flex;
       align-items: center;
@@ -381,109 +375,98 @@
     .tap-btn:active {
       transform: scale(0.93);
       box-shadow:
-        0 0 0 3px rgba(201,168,76,0.6),
-        0 0 0 8px rgba(201,168,76,0.2),
-        0 4px 16px rgba(0,0,0,0.5),
-        inset 0 2px 8px rgba(0,0,0,0.4);
-      background: radial-gradient(circle at 35% 35%,
-        #2aad92 0%,
-        var(--teal-light) 40%,
-        var(--teal) 100%
-      );
+        0 0 0 3px rgba(26,107,94,0.4),
+        0 0 0 8px rgba(26,107,94,0.15),
+        0 4px 12px rgba(26,107,94,0.3),
+        inset 0 2px 8px rgba(0,0,0,0.25);
     }
 
-    .tap-icon {
-      font-size: 28px;
-      line-height: 1;
-    }
+    .tap-icon { font-size: 28px; line-height: 1; }
 
     .tap-label {
       font-family: 'Cinzel', serif;
       font-size: 9px;
       letter-spacing: 1.5px;
-      color: var(--cream-light);
-      opacity: 0.9;
+      color: rgba(255,255,255,0.9);
       text-transform: uppercase;
     }
 
-    /* ─── Controls Row ─── */
-    .controls-row {
-      display: flex;
-      gap: 12px;
-      direction: ltr;
-    }
-
-    .ctrl-btn {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 22px;
-      border: 1px solid rgba(201,168,76,0.3);
-      background: rgba(15,32,68,0.7);
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      font-size: 10px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-    }
-
-    .ctrl-btn:active { transform: scale(0.96); background: rgba(201,168,76,0.15); }
-    .ctrl-btn.reset { color: #e87070; border-color: rgba(232,112,112,0.35); }
-
-    /* ─── Stats Row ─── */
-    .stats-row {
-      display: flex;
-      gap: 8px;
-      direction: ltr;
-      width: 100%;
-    }
-
+    /* ─── Stats ─── */
     .stat-card {
-      flex: 1;
-      background: rgba(15,32,68,0.6);
-      border: 1px solid rgba(201,168,76,0.2);
+      background: var(--card);
+      border: 1.5px solid rgba(184,134,11,0.2);
       border-radius: 10px;
       padding: 8px 6px;
       text-align: center;
+      box-shadow: 0 2px 8px var(--shadow);
     }
 
     .stat-value {
       font-family: 'Cinzel', serif;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
-      color: var(--gold-light);
+      color: var(--teal);
       line-height: 1;
     }
 
     .stat-label {
-      font-family: 'Amiri', serif;
-      font-size: 10px;
-      color: var(--cream);
-      opacity: 0.6;
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      color: var(--text-light);
       margin-top: 2px;
+      letter-spacing: 0.5px;
       direction: ltr;
     }
 
-    /* ─── History Panel ─── */
+    /* ─── Controls ─── */
+    .controls-row {
+      display: flex;
+      gap: 10px;
+      direction: ltr;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 22px;
+      border: 1.5px solid rgba(184,134,11,0.3);
+      background: var(--card);
+      color: var(--text-mid);
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+
+    .ctrl-btn:active { transform: scale(0.96); background: var(--bg2); }
+    .ctrl-btn.reset { color: #c0392b; border-color: rgba(192,57,43,0.3); }
+    .ctrl-btn.toggle-btn { color: var(--teal); border-color: rgba(26,107,94,0.35); font-size: 9.5px; }
+    .ctrl-btn.toggle-btn.off { color: var(--text-light); border-color: rgba(139,110,58,0.25); background: var(--bg2); }
+
+    /* ─── History ─── */
     .history-toggle {
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 0 16px;
+      margin: 0 14px;
       padding: 8px 14px;
-      background: rgba(15,32,68,0.6);
-      border: 1px solid rgba(201,168,76,0.2);
+      background: var(--card);
+      border: 1.5px solid rgba(184,134,11,0.2);
       border-radius: 10px;
       cursor: pointer;
       direction: ltr;
+      box-shadow: 0 2px 6px var(--shadow);
     }
 
     .history-toggle-text {
       font-family: 'Cinzel', serif;
       font-size: 11px;
-      color: var(--gold);
+      color: var(--text-mid);
       letter-spacing: 1px;
       text-transform: uppercase;
     }
@@ -498,20 +481,20 @@
 
     .history-panel {
       flex-shrink: 0;
-      margin: 4px 16px 0;
+      margin: 4px 14px 0;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.35s ease;
     }
 
-    .history-panel.open { max-height: 200px; }
+    .history-panel.open { max-height: 180px; }
 
     .history-inner {
-      background: rgba(10,22,40,0.8);
-      border: 1px solid rgba(201,168,76,0.15);
+      background: var(--card);
+      border: 1.5px solid rgba(184,134,11,0.15);
       border-radius: 10px;
-      padding: 10px;
-      max-height: 190px;
+      padding: 8px;
+      max-height: 170px;
       overflow-y: auto;
     }
 
@@ -520,60 +503,35 @@
       justify-content: space-between;
       align-items: center;
       padding: 6px 8px;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
+      border-bottom: 1px solid var(--bg3);
       direction: ltr;
     }
 
     .history-item:last-child { border-bottom: none; }
-
-    .history-name {
-      font-family: 'Amiri', serif;
-      font-size: 13px;
-      color: var(--cream);
-      direction: rtl;
-    }
-
-    .history-count {
-      font-family: 'Cinzel', serif;
-      font-size: 15px;
-      color: var(--gold);
-    }
-
-    .history-time {
-      font-size: 10px;
-      color: var(--cream);
-      opacity: 0.4;
-    }
-
-    .history-empty {
-      text-align: center;
-      color: var(--cream);
-      opacity: 0.4;
-      font-family: 'Amiri', serif;
-      font-size: 13px;
-      padding: 10px;
-      direction: ltr;
-    }
+    .history-name { font-family: 'Amiri', serif; font-size: 14px; color: var(--text-dark); direction: rtl; }
+    .history-count { font-family: 'Cinzel', serif; font-size: 16px; color: var(--teal); font-weight: 700; }
+    .history-time { font-size: 10px; color: var(--text-light); }
+    .history-empty { text-align: center; color: var(--text-light); font-family: 'Amiri', serif; font-size: 13px; padding: 10px; direction: ltr; }
 
     /* ─── Footer ─── */
     .footer {
       flex-shrink: 0;
       text-align: center;
-      padding: 6px 16px 10px;
+      padding: 5px 16px 10px;
       direction: ltr;
     }
 
     .footer-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-      margin-bottom: 6px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+      margin-bottom: 5px;
+      opacity: 0.5;
     }
 
     .footer-text {
       font-family: 'Cinzel', serif;
       font-size: 9px;
-      color: var(--gold);
-      opacity: 0.5;
+      color: var(--text-light);
       letter-spacing: 2px;
       text-transform: uppercase;
     }
@@ -584,42 +542,25 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0.8);
-      background: linear-gradient(135deg, var(--teal) 0%, var(--navy-light) 100%);
-      border: 1px solid var(--gold);
-      border-radius: 14px;
-      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 16px;
+      padding: 16px 28px;
       text-align: center;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
       transition: all 0.3s ease;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      box-shadow: 0 12px 40px rgba(26,107,94,0.4);
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
+    .toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .toast-arabic { font-family: 'Amiri', serif; font-size: 22px; color: var(--gold-pale); direction: rtl; }
+    .toast-text { font-family: 'Cinzel', serif; font-size: 11px; color: #fff; letter-spacing: 1px; margin-top: 4px; }
 
-    .toast-arabic {
-      font-family: 'Amiri', serif;
-      font-size: 22px;
-      color: var(--gold-light);
-      direction: rtl;
-    }
-
-    .toast-text {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      color: var(--cream);
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
-
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb { background: rgba(184,134,11,0.3); border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -649,10 +590,10 @@
 
   <!-- Tasbeeh Selector -->
   <div class="tasbeeh-selector">
-    <div class="tasbeeh-chip active" onclick="selectTasbeeh(0, this)">سُبْحَانَ اللّٰه<br><small style="font-size:8px;direction:ltr">Subhanallah</small></div>
-    <div class="tasbeeh-chip" onclick="selectTasbeeh(1, this)">اَلْحَمْدُ لِلّٰه<br><small style="font-size:8px;direction:ltr">Alhamdulillah</small></div>
-    <div class="tasbeeh-chip" onclick="selectTasbeeh(2, this)">اَللّٰهُ اَكْبَر<br><small style="font-size:8px;direction:ltr">Allahu Akbar</small></div>
-    <div class="tasbeeh-chip" onclick="selectTasbeeh(3, this)">لَآ اِلٰهَ اِلَّا اللّٰه<br><small style="font-size:8px;direction:ltr">La ilaha illallah</small></div>
+    <div class="tasbeeh-chip active" onclick="selectTasbeeh(0, this)">سُبْحَانَ اللّٰه<small>Subhanallah</small></div>
+    <div class="tasbeeh-chip" onclick="selectTasbeeh(1, this)">اَلْحَمْدُ لِلّٰه<small>Alhamdulillah</small></div>
+    <div class="tasbeeh-chip" onclick="selectTasbeeh(2, this)">اَللّٰهُ اَكْبَر<small>Allahu Akbar</small></div>
+    <div class="tasbeeh-chip" onclick="selectTasbeeh(3, this)">لَآ اِلٰهَ اِلَّا اللّٰه<small>La ilaha illallah</small></div>
   </div>
 
   <!-- Counter Section -->
@@ -660,11 +601,10 @@
 
     <div class="arabic-text" id="arabicDisplay">سُبْحَانَ اللّٰهُ</div>
 
-    <!-- Ring + Button Row -->
-    <div style="display:flex; align-items:center; justify-content:center; gap:20px; width:100%;">
+    <div style="display:flex; align-items:center; justify-content:center; gap:16px; width:100%; flex-shrink:0;">
 
-      <!-- Left Stats -->
-      <div class="stats-row" style="flex-direction:column; width:80px;">
+      <!-- Stats left -->
+      <div style="display:flex; flex-direction:column; gap:8px; width:76px;">
         <div class="stat-card">
           <div class="stat-value" id="totalStat">0</div>
           <div class="stat-label">Total</div>
@@ -680,15 +620,14 @@
         <svg class="counter-ring-svg" viewBox="0 0 100 100">
           <defs>
             <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#8b6914;stop-opacity:1" />
-              <stop offset="50%" style="stop-color:#e8c97a;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:1" />
+              <stop offset="0%" style="stop-color:#7a5c00;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#d4a017;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
             </linearGradient>
           </defs>
-          <circle class="counter-ring-bg" cx="50" cy="50" r="45" />
-          <circle class="counter-ring-progress" id="progressRing" cx="50" cy="50" r="45"
-            stroke-dasharray="282.74"
-            stroke-dashoffset="282.74" />
+          <circle class="counter-ring-bg" cx="50" cy="50" r="44" />
+          <circle class="counter-ring-progress" id="progressRing" cx="50" cy="50" r="44"
+            stroke-dasharray="276.46" stroke-dashoffset="276.46" />
         </svg>
         <div class="counter-display">
           <div class="counter-number" id="counterNum">0</div>
@@ -712,6 +651,11 @@
       <button class="ctrl-btn" onclick="saveToHistory()">💾 Save</button>
       <button class="ctrl-btn reset" onclick="resetCounter()">↺ Reset</button>
       <button class="ctrl-btn" onclick="undoTap()">↩ Undo</button>
+    </div>
+    <!-- Sound + Haptics Toggles -->
+    <div class="controls-row">
+      <button class="ctrl-btn toggle-btn" id="soundBtn" onclick="toggleSound()">🔊 Sound: ON</button>
+      <button class="ctrl-btn toggle-btn" id="hapticBtn" onclick="toggleHaptic()">📳 Haptic: ON</button>
     </div>
 
   </div>
@@ -742,34 +686,124 @@
 </div>
 
 <script>
-  // ─── State ───
   const TASBEEHS = [
-    { arabic: 'سُبْحَانَ اللّٰهُ',       name: 'Subhanallah',     target: 33 },
-    { arabic: 'اَلْحَمْدُ لِلّٰهِ',       name: 'Alhamdulillah',  target: 33 },
-    { arabic: 'اَللّٰهُ أَكْبَرُ',        name: 'Allahu Akbar',   target: 34 },
+    { arabic: 'سُبْحَانَ اللّٰهُ',       name: 'Subhanallah',       target: 33 },
+    { arabic: 'اَلْحَمْدُ لِلّٰهِ',       name: 'Alhamdulillah',    target: 33 },
+    { arabic: 'اَللّٰهُ أَكْبَرُ',        name: 'Allahu Akbar',     target: 34 },
     { arabic: 'لَآ اِلٰهَ اِلَّا اللّٰهُ', name: 'La ilaha illallah', target: 100 },
   ];
 
   let state = JSON.parse(localStorage.getItem('safa_state') || 'null') || {
-    current: 0,
-    total: 0,
-    rounds: 0,
-    selectedIdx: 0,
-    history: [],
-    donateUrl: ''
+    current: 0, total: 0, rounds: 0, selectedIdx: 0, history: [], donateUrl: ''
   };
 
-  // ─── Promo / KV Config ───
+  // ─── Sound & Haptic Settings ───
+  let soundOn  = localStorage.getItem('safa_sound')  !== 'off';
+  let hapticOn = localStorage.getItem('safa_haptic') !== 'off';
+  let audioCtx = null;
+
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  // Soft wooden bead "click" sound using Web Audio API — no file needed
+  function playTapSound() {
+    if (!soundOn) return;
+    try {
+      const ctx = getAudioCtx();
+      const now = ctx.currentTime;
+
+      // Oscillator for the "click" body
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(220, now + 0.08);
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      osc.start(now);
+      osc.stop(now + 0.13);
+
+      // Small noise burst for "wood" texture
+      const bufLen = ctx.sampleRate * 0.04;
+      const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufLen);
+      const noise = ctx.createBufferSource();
+      noise.buffer = buf;
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.08, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+      noise.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+      noise.start(now);
+    } catch(e) {}
+  }
+
+  // Celebration chime when round completes
+  function playCelebSound() {
+    if (!soundOn) return;
+    try {
+      const ctx = getAudioCtx();
+      const notes = [523, 659, 784, 1047]; // C E G C
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.type = 'sine';
+        const t = ctx.currentTime + i * 0.13;
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+        osc.start(t); osc.stop(t + 0.42);
+      });
+    } catch(e) {}
+  }
+
+  function doHaptic(pattern) {
+    if (!hapticOn) return;
+    if (navigator.vibrate) navigator.vibrate(pattern);
+  }
+
+  function toggleSound() {
+    soundOn = !soundOn;
+    localStorage.setItem('safa_sound', soundOn ? 'on' : 'off');
+    const btn = document.getElementById('soundBtn');
+    btn.textContent = soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+    btn.classList.toggle('off', !soundOn);
+    if (soundOn) playTapSound(); // preview
+  }
+
+  function toggleHaptic() {
+    hapticOn = !hapticOn;
+    localStorage.setItem('safa_haptic', hapticOn ? 'on' : 'off');
+    const btn = document.getElementById('hapticBtn');
+    btn.textContent = hapticOn ? '📳 Haptic: ON' : '📴 Haptic: OFF';
+    btn.classList.toggle('off', !hapticOn);
+    if (hapticOn) doHaptic(40); // preview
+  }
+
+  function syncToggleUI() {
+    const sb = document.getElementById('soundBtn');
+    const hb = document.getElementById('hapticBtn');
+    sb.textContent = soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+    sb.classList.toggle('off', !soundOn);
+    hb.textContent = hapticOn ? '📳 Haptic: ON' : '📴 Haptic: OFF';
+    hb.classList.toggle('off', !hapticOn);
+  }
+
   const CONFIG_URL = 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/config.json';
 
   async function loadConfig() {
     try {
       const cached = localStorage.getItem('safa_config');
       const cacheTime = localStorage.getItem('safa_config_time');
-      const ONE_HOUR = 3600000;
-      if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < ONE_HOUR) {
-        applyConfig(JSON.parse(cached));
-        return;
+      if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+        applyConfig(JSON.parse(cached)); return;
       }
       const res = await fetch(CONFIG_URL);
       if (!res.ok) return;
@@ -784,18 +818,14 @@
   }
 
   function applyConfig(cfg) {
-    if (!cfg) return;
+    if (!cfg || !cfg.promotions) return;
     const now = new Date();
     const hhmm = now.getHours() * 60 + now.getMinutes();
-    let active = null;
-    if (cfg.promotions) {
-      for (const p of cfg.promotions) {
-        const [sh, sm] = p.start.split(':').map(Number);
-        const [eh, em] = p.end.split(':').map(Number);
-        const start = sh * 60 + sm, end = eh * 60 + em;
-        if (hhmm >= start && hhmm < end) { active = p; break; }
-      }
-      if (!active && cfg.promotions.length > 0) active = cfg.promotions[0];
+    let active = cfg.promotions[0];
+    for (const p of cfg.promotions) {
+      const [sh,sm] = p.start.split(':').map(Number);
+      const [eh,em] = p.end.split(':').map(Number);
+      if (hhmm >= sh*60+sm && hhmm < eh*60+em) { active = p; break; }
     }
     if (active && active.image) {
       const img = document.getElementById('promoImage');
@@ -811,10 +841,7 @@
     if (state.donateUrl) window.open(state.donateUrl, '_blank');
   }
 
-  // ─── UI Helpers ───
-  function saveState() {
-    localStorage.setItem('safa_state', JSON.stringify(state));
-  }
+  function saveState() { localStorage.setItem('safa_state', JSON.stringify(state)); }
 
   function updateUI() {
     const t = TASBEEHS[state.selectedIdx];
@@ -823,75 +850,52 @@
     document.getElementById('targetLabel').textContent = '/ ' + t.target;
     document.getElementById('totalStat').textContent = state.total;
     document.getElementById('roundStat').textContent = state.rounds;
-    // Ring progress
     const pct = Math.min(state.current / t.target, 1);
-    const circ = 282.74;
-    document.getElementById('progressRing').style.strokeDashoffset = circ - (pct * circ);
+    document.getElementById('progressRing').style.strokeDashoffset = 276.46 - (pct * 276.46);
   }
 
-  function showToast(arabic, text, dur = 1800) {
+  function showToast(arabic, text) {
     const t = document.getElementById('toast');
     document.getElementById('toastArabic').textContent = arabic;
     document.getElementById('toastText').textContent = text;
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), dur);
+    setTimeout(() => t.classList.remove('show'), 2000);
   }
 
-  // ─── Tap ───
   function tap() {
     const t = TASBEEHS[state.selectedIdx];
-    state.current++;
-    state.total++;
-    // Pulse
+    state.current++; state.total++;
     const num = document.getElementById('counterNum');
-    num.classList.remove('pulse');
-    void num.offsetWidth;
-    num.classList.add('pulse');
-    // Ripple
+    num.classList.remove('pulse'); void num.offsetWidth; num.classList.add('pulse');
     const rip = document.getElementById('tapRipple');
-    rip.classList.remove('animate');
-    void rip.offsetWidth;
-    rip.classList.add('animate');
-    // Vibrate
-    if (navigator.vibrate) navigator.vibrate(30);
-    // Target reached
+    rip.classList.remove('animate'); void rip.offsetWidth; rip.classList.add('animate');
+
+    playTapSound();
+    doHaptic(25);
+
     if (state.current >= t.target) {
-      state.rounds++;
-      state.current = 0;
+      state.rounds++; state.current = 0;
+      playCelebSound();
+      doHaptic([60, 30, 60, 30, 100]);
       showToast('مَاشَاءَاللّٰه', t.name + ' × ' + t.target + ' Complete! 🌟');
-      if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
     }
-    updateUI();
-    saveState();
-  }
-
-  function undoTap() {
-    if (state.current > 0) {
-      state.current--;
-      state.total = Math.max(0, state.total - 1);
-      updateUI(); saveState();
-    }
-  }
-
-  function resetCounter() {
-    if (state.current === 0 && state.total === 0) return;
-    state.current = 0;
     updateUI(); saveState();
   }
 
-  // ─── History ───
+  function undoTap() {
+    if (state.current > 0) { state.current--; state.total = Math.max(0, state.total-1); updateUI(); saveState(); }
+  }
+
+  function resetCounter() {
+    if (state.current === 0) return;
+    state.current = 0; updateUI(); saveState();
+  }
+
   function saveToHistory() {
     if (state.total === 0) return;
     const t = TASBEEHS[state.selectedIdx];
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en', {hour:'2-digit', minute:'2-digit'});
-    state.history.unshift({
-      name: t.name,
-      arabic: t.arabic,
-      count: state.total,
-      rounds: state.rounds,
-      time: timeStr
-    });
+    const timeStr = new Date().toLocaleTimeString('en', {hour:'2-digit', minute:'2-digit'});
+    state.history.unshift({ name: t.name, arabic: t.arabic, count: state.total, rounds: state.rounds, time: timeStr });
     if (state.history.length > 20) state.history.pop();
     renderHistory();
     showToast('جَزَاكَ اللّٰهُ خَيْرًا', 'Saved! Total: ' + state.total);
@@ -900,47 +904,35 @@
 
   function renderHistory() {
     const list = document.getElementById('histList');
-    if (!state.history.length) {
-      list.innerHTML = '<div class="history-empty">No history yet</div>';
-      return;
-    }
+    if (!state.history.length) { list.innerHTML = '<div class="history-empty">No history yet</div>'; return; }
     list.innerHTML = state.history.map(h => `
       <div class="history-item">
-        <div>
-          <div class="history-name">${h.arabic}</div>
-          <div class="history-time">${h.time} · ${h.rounds} rounds</div>
-        </div>
+        <div><div class="history-name">${h.arabic}</div><div class="history-time">${h.time} · ${h.rounds} rounds</div></div>
         <div class="history-count">${h.count}</div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function toggleHistory() {
-    const panel = document.getElementById('histPanel');
-    const arrow = document.getElementById('histArrow');
-    const isOpen = panel.classList.toggle('open');
-    arrow.classList.toggle('open', isOpen);
+    document.getElementById('histPanel').classList.toggle('open');
+    document.getElementById('histArrow').classList.toggle('open');
   }
 
-  // ─── Tasbeeh Select ───
   function selectTasbeeh(idx, el) {
     if (state.current > 0) saveToHistory();
-    state.selectedIdx = idx;
-    state.current = 0;
+    state.selectedIdx = idx; state.current = 0;
     document.querySelectorAll('.tasbeeh-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     updateUI(); saveState();
   }
 
-  // ─── Init ───
-  updateUI();
-  renderHistory();
-  loadConfig();
+  // Sync chip UI on load
+  document.querySelectorAll('.tasbeeh-chip').forEach((c, i) => {
+    c.classList.toggle('active', i === state.selectedIdx);
+  });
 
-  // ─── Service Worker ───
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
-  }
+  updateUI(); renderHistory(); loadConfig(); syncToggleUI();
+
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
 </body>
 </html>
